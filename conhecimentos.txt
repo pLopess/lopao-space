@@ -1,0 +1,37 @@
+Conhecimentos/ Comandos aprendidos durante o curso:
+
+Começando:
+     virtualenv venv                        #Criar o ambiente virtual nomeando de 'venv' (nomenclatura padrao)
+     venv/Scripts/activate                  #Ativar o AV
+     pip install django                     #Baixar o Django no AV
+     django-admin startproject setup .      #Começar projeto chamando de 'setup' (nomenclatura padrao)
+     python manage.py runserver             #Rodar o servidor
+
+
+
+Settings:
+Mudar a timezone (America/Sao_Paulo) e a linguagem (pt-br) do projeto fazendo alterações no arquivo settings.py
+
+
+Segurança:
+    1) Crie um novo arquivo chamado .env no diretório raiz da aplicação para armazenar a SECRET_KEY
+        SECRET_KEY=<chave aleatória>
+
+    pip install python-dotenv               #Baixar o pacote python-dotenv
+
+    3) Importe os pacotes python-dotenv e os no arquivo settings.py
+        from pathlib import os
+        from dotenv import load_dotenv
+
+    4) Importe a SECRET_KEY do arquivo .env e coloque dentro da variável SECRET_KEY no arquivo settings.py
+        load_dotenv()
+        SECRET_KEY = str(os.getenv('SECRET_KEY'))
+
+    5) Gere um arquivo .gitignore no diretório raiz do projeto e inclua o arquivo .env como conteúdo
+        Conteúdo do .gitignore:
+        .env
+
+        ou acesse o site gitignore.io
+        coloque qual tecnologia vc esta trabalhando (no caso Django)
+        copia tudo e cola no gitignore     
+        #Para funcionar direitinho mantenha o uso da nomenclatura padrao!!!
