@@ -19,15 +19,15 @@ Segurança:
 
     pip install python-dotenv               #Baixar o pacote python-dotenv
 
-    3) Importe os pacotes python-dotenv e os no arquivo settings.py
+    2) Importe os pacotes python-dotenv e os no arquivo settings.py
         from pathlib import os
         from dotenv import load_dotenv
 
-    4) Importe a SECRET_KEY do arquivo .env e coloque dentro da variável SECRET_KEY no arquivo settings.py
+    3) Importe a SECRET_KEY do arquivo .env e coloque dentro da variável SECRET_KEY no arquivo settings.py
         load_dotenv()
         SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
-    5) Gere um arquivo .gitignore no diretório raiz do projeto e inclua o arquivo .env como conteúdo
+    4) Gere um arquivo .gitignore no diretório raiz do projeto e inclua o arquivo .env como conteúdo
         Conteúdo do .gitignore:
         .env
 
@@ -35,3 +35,38 @@ Segurança:
         coloque qual tecnologia vc esta trabalhando (no caso Django)
         copia tudo e cola no gitignore     
         #Para funcionar direitinho mantenha o uso da nomenclatura padrao!!!
+
+App e views:
+    1) Criar o primeiro app com o comando python manage.py startapp galeria
+
+    2) Acesse o arquivo views.py dentro do diretório do app galeria e crie um função responsável por mostrar um HTML da página principal do site;
+        from django.shortcuts import render
+
+        def index(request):
+            return render(request, 'index.html')  #arquivo criado depois na pasta templates
+
+    3) Crie um novo arquivo chamado urls.py dentro do diretório da aplicação galeria;
+
+    4) Crie uma “palheta” de urls dentro do arquivo urls.py (do diretório galeria) que leve à função index;
+        from django.urls import path
+        from galeria.views import index
+
+        urlpatterns = [
+            path('', index)
+        ]
+
+    5) Altere o arquivo urls.py do diretório do projeto (setup) para incluir a "palheta" de urls mencionada no urls.py de galeria;
+        from django.contrib import admin
+        from django.urls import path, include
+
+        urlpatterns = [
+            path('admin/', admin.site.urls),
+            path('', include('galeria.urls'))
+        ]
+
+
+    6) Isolamos o template da app galeria, criando uma nova pasta chamada templates e reconfigurando o settings.py.
+        TEMPLATES = [
+            'DIRS': [os.path.join(BASE_DIR, 'templates')]
+
+        Cria o arquivo index.html dentro da pasta templates
